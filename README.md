@@ -178,7 +178,4 @@ python buildSkeleton.py
 - [COMPAS CGAL 文檔](https://compas.dev/latest/api/compas_cgal.html)
 - [COMPAS Viewer 文檔](https://github.com/compas-dev/compas_viewer)
 - [Shapely 文檔](https://shapely.readthedocs.io/)
-- [NumPy 文檔](https://numpy.org/doc/)
-# Visibility-Polygon
-# Visibility-Polygon
-# Visibility-Polygon
+- [NumPy 文檔](https://numpy.org/doc/)# Visibility-Polygon
