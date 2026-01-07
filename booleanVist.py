@@ -1,25 +1,6 @@
-import compas.datastructures as cd
-import compas.geometry as cg
-import pathlib
-import numpy as np
 from shapely.geometry import Polygon, LineString, Point as ShPoint
 from shapely.ops import unary_union
-from compas_viewer import Viewer
 import isovist
-import buildSkeleton as skel
-
-# === Load Road Mesh ===
-filepath_road = pathlib.Path(__file__).parent / "Roads.stl"
-RoadMesh = cd.Mesh.from_stl(filepath_road)
-
-# === Find Boundary Lines ===
-RoadLines = isovist.find_boundary_lines(RoadMesh)
-
-# === 製作圖形骨架 ===
-Skeleton = skel.costume_straight_skeleton(RoadMesh)
-
-# === 獲取邊界多邊形 ===
-outer_poly, hole_polys = skel.mesh_boundaries_to_polygons(RoadMesh)
 
 # === 定義計算多點可見多邊形聯集的函數 ===
 def compute_visibility_union(points, skeleton, boundary_polygon, boundary_lines):

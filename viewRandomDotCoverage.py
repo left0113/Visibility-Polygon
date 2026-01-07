@@ -12,7 +12,7 @@ filepath_road = pathlib.Path(__file__).parent / "Roads.stl"
 RoadMesh = cd.Mesh.from_stl(filepath_road)
 
 # === Find Boundary Lines ===
-RoadLines = isovist.find_boundary_lines(RoadMesh)
+RoadLines = skel.find_boundary_lines(RoadMesh)
 
 # === 製作圖形骨架 ===
 Skeleton = skel.costume_straight_skeleton(RoadMesh)
@@ -39,8 +39,8 @@ boundary_polygon = Polygon(outer_poly, holes=hole_polys)
 print(f"邊界多邊形面積: {boundary_polygon.area:.6f}")
 
 # === 生成隨機點 ===
-# np.random.seed(42)  # 註解掉固定種子，每次運行都會產生不同的隨機點
-num_points = 5000
+# np.random.seed(42)
+num_points = 20000
 random_points = []
 print(f"\n=== 生成 {num_points} 個隨機點 ===\n")
 for i in range(num_points):

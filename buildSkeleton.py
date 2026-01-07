@@ -1,7 +1,5 @@
-import compas.datastructures as cd
 import compas.geometry as cg
 import compas_cgal.straight_skeleton_2 as skeleton
-import pathlib
 import numpy as np
 from shapely.geometry import Polygon, LineString, Point as ShPoint
 from shapely.ops import unary_union
@@ -36,7 +34,7 @@ def find_boundary_vertices(mesh):
 
 def compute_isovist_compas(mesh, origin, n_rays=360, max_dist=1000.0):
     """
-    使用 COMPAS mesh 與 Shapely 計算可見多邊形（2D 射線投射）
+    使用 COMPAS mesh 與 Shapely 計算可見多邊形(2D 射線投射)
     
     mesh : compas.datastructures.Mesh
     origin : (x, y, z) 或 (x, y) - 發射點座標
@@ -191,9 +189,10 @@ def ensure_ccw(coords):
 
 def costume_straight_skeleton(mesh):
     # === 製作圖形骨架 ===
+    print("\n=== 製作圖形骨架 ===")
     outer_poly, hole_polys = mesh_boundaries_to_polygons(mesh)
     if outer_poly:
-        print(f"Number of holes: {len(hole_polys)}")
+        print(f"空洞數量: {len(hole_polys)}")
     
         # 確保外環為 CCW（normal = +Z）
         outer_ccw = ensure_ccw(outer_poly)
@@ -212,11 +211,8 @@ def costume_straight_skeleton(mesh):
         # 現在傳入的是：外環 CCW 3D + 洞 CW 3D
         Skeleton = skeleton.interior_straight_skeleton_with_holes(outer_3d, holes_3d)
     else:
-        print("No valid boundary polygon found")
+        print("沒有可用多邊形邊界來製作骨架")
         Skeleton = None
-    
-    node_count = sum(1 for _ in Skeleton.nodes())
-    print("skeleton nodes:", node_count)
 
     # === 為骨架節點添加 inner_node / boundary_node 屬性 ===
     print("\n=== 為骨架節點添加屬性 ===")

@@ -1,12 +1,9 @@
 import compas.datastructures as cd
 import compas.geometry as cg
-import compas_cgal.straight_skeleton_2 as skeleton
 import pathlib
-import numpy as np
 from shapely.geometry import Polygon, LineString, Point as ShPoint
 from shapely.ops import unary_union
 from compas_viewer import Viewer
-from compas_viewer.scene import Tag
 import isovist
 import buildSkeleton as skel
 
@@ -18,8 +15,8 @@ RoadMesh = cd.Mesh.from_stl(filepath_road)
 BlockMesh = cd.Mesh.from_stl(filepath_block)
 
 # === Find Boundary Lines ===
-BlockLines = isovist.find_boundary_lines(BlockMesh)
-RoadLines = isovist.find_boundary_lines(RoadMesh)
+BlockLines = skel.find_boundary_lines(BlockMesh)
+RoadLines = skel.find_boundary_lines(RoadMesh)
 
 
 Skeleton = skel.costume_straight_skeleton(RoadMesh)
